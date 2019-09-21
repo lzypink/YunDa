@@ -28,45 +28,45 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        loginForm: {
-          username: '',
-          password:'',
-        },
-        loginFormRules: {
-          username: [
-            { required: true, message: '请输入登录名称', trigger: 'blur' },
-            { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
-          ],
-          password: [
-            { required: true, message: '请输入登录密码', trigger: 'blur' },
-            { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
-          ]
-        },
-        ssr: require('../assets/logo.png')
-      }
-    },
-    methods: {
-      restLoginForm() {
-        // console.log(this);
-        this.$refs.loginFormRef.resetFields()
+export default {
+  data () {
+    return {
+      loginForm: {
+        username: '',
+        password: ''
       },
-      login() {
-        this.$refs.loginFormRef.validate( async valid => {
-          if(!valid) return;
-          const { data: res } = await this.$http.post('login', this.loginForm)
-          if(res.meta.status != 200) return this.$message.error('登录失败')
-          this.$message.success('登录成功')
-          // 把登录成功之后服务器返回的token保存到客户端的sessionStorage中
-          window.sessionStorage.setItem('token', res.data.token)
-          // 通过编程式导航跳转到后台主页
-          this.$router.push('/home')
-        })
-      }
+      loginFormRules: {
+        username: [
+          { required: true, message: '请输入登录名称', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入登录密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
+        ]
+      },
+      ssr: require('../assets/logo.png')
+    }
+  },
+  methods: {
+    restLoginForm () {
+      // console.log(this);
+      this.$refs.loginFormRef.resetFields()
+    },
+    login () {
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) return
+        const { data: res } = await this.$http.post('login', this.loginForm)
+        if (res.meta.status != 200) return this.$message.error('登录失败')
+        this.$message.success('登录成功')
+        // 把登录成功之后服务器返回的token保存到客户端的sessionStorage中
+        window.sessionStorage.setItem('token', res.data.token)
+        // 通过编程式导航跳转到后台主页
+        this.$router.push('/home')
+      })
     }
   }
+}
 </script>
 
 <style lang='less' scoped>
@@ -116,6 +116,5 @@
     display: flex;
     justify-content: flex-end;
   }
-
 
 </style>

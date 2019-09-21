@@ -22,7 +22,6 @@
           <el-button type="info" >重置</el-button>
         </el-form-item>
       </el-form>
-
     </div>
   </div>
 </template>
@@ -57,7 +56,7 @@ export default {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.loginForm)
-        if (res.meta.status != 200) return this.$message.error('登录失败')
+        if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
         // 把登录成功之后服务器返回的token保存到客户端的sessionStorage中
         window.sessionStorage.setItem('token', res.data.token)

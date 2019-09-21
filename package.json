@@ -12,6 +12,7 @@
     "element-ui": "^2.12.0",
     "somepackage": "0.0.1",
     "vue": "^2.6.10",
+    "less": "^3.9.0",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },

@@ -3,7 +3,7 @@
   <!--<el-header class=""></el-header>-->
   <!--<el-main>Main</el-main>-->
 <div>
-  <router-link to="/sdfasfes"> 首页</router-link>
+  <router-link to="/HelloWorld"> 首页</router-link>
   <router-link to="/login">登录</router-link>
   <router-view/>
 </div>

@@ -4,22 +4,22 @@
       <!-- 头像区域 -->
       <div class="avater_box">
         <img :src='ssr' alt="">
-
+        
       </div>
-      <!-- 表单区域 -->
+       <!-- 表单区域 -->
       <el-form ref='loginFormRef' :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
         <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
         </el-form-item>
-        <!-- 密码 -->
+         <!-- 密码 -->
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" type="password" prefix-icon="iconfont icon-lock_fill"></el-input>
         </el-form-item>
-        <!-- 按钮区域 -->
+         <!-- 按钮区域 -->
         <el-form-item class="btns">
           <el-button type="primary" >登录</el-button>
-          <el-button type="info" >重置</el-button>
+           <el-button type="info" >重置</el-button>
         </el-form-item>
       </el-form>
 
@@ -29,11 +29,11 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       loginForm: {
         username: '',
-        password: ''
+        password:'',
       },
       loginFormRules: {
         username: [
@@ -49,15 +49,15 @@ export default {
     }
   },
   methods: {
-    restLoginForm () {
+    restLoginForm() {
       // console.log(this);
-      this.$refs.loginFormRef.resetFields()
+      this.$refs.loginFormRef.resetFields()  
     },
-    login () {
-      this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) return
+    login() {
+      this.$refs.loginFormRef.validate( async valid => {
+        if(!valid) return;
         const { data: res } = await this.$http.post('login', this.loginForm)
-        if (res.meta.status != 200) return this.$message.error('登录失败')
+        if(res.meta.status != 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
         // 把登录成功之后服务器返回的token保存到客户端的sessionStorage中
         window.sessionStorage.setItem('token', res.data.token)
@@ -117,4 +117,5 @@ export default {
     justify-content: flex-end;
   }
 
+  
 </style>

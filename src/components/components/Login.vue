@@ -4,7 +4,7 @@
       <!-- 头像区域 -->
       <div class="avater_box">
         <img :src='ssr' alt="">
-        
+
       </div>
        <!-- 表单区域 -->
       <el-form ref='loginFormRef' :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
@@ -18,22 +18,22 @@
         </el-form-item>
          <!-- 按钮区域 -->
         <el-form-item class="btns">
-          <el-button type="primary" >登录</el-button>
+          <el-button @click="login" >登录</el-button>
            <el-button type="info" >重置</el-button>
         </el-form-item>
       </el-form>
-
+      <el-button @click="login" style="position: absolute;top:100px;left:100px">进首页</el-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       loginForm: {
         username: '',
-        password:'',
+        password: ''
       },
       loginFormRules: {
         username: [
@@ -44,26 +44,27 @@ export default {
           { required: true, message: '请输入登录密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在 6 到 15 个字符', trigger: 'blur' }
         ]
-      },
-      ssr: require('../assets/logo.png')
+      }
+      // ssr: require('../assets/header-logo.png')
     }
   },
   methods: {
-    restLoginForm() {
+    restLoginForm () {
       // console.log(this);
-      this.$refs.loginFormRef.resetFields()  
+      this.$refs.loginFormRef.resetFields()
     },
-    login() {
-      this.$refs.loginFormRef.validate( async valid => {
-        if(!valid) return;
-        const { data: res } = await this.$http.post('login', this.loginForm)
-        if(res.meta.status != 200) return this.$message.error('登录失败')
-        this.$message.success('登录成功')
-        // 把登录成功之后服务器返回的token保存到客户端的sessionStorage中
-        window.sessionStorage.setItem('token', res.data.token)
-        // 通过编程式导航跳转到后台主页
-        this.$router.push('/home')
-      })
+    login () {
+      this.$router.replace('/home')
+      // this.$refs.loginFormRef.validate( async valid => {
+      //   if(!valid) return;
+      //   const { data: res } = await this.$http.post('login', this.loginForm)
+      //   if(res.meta.status != 200) return this.$message.error('登录失败')
+      //   this.$message.success('登录成功')
+      //   // 把登录成功之后服务器返回的token保存到客户端的sessionStorage中
+      //   window.sessionStorage.setItem('token', res.data.token)
+      //   // 通过编程式导航跳转到后台主页
+      //   this.$router.push('/home')
+      // })
     }
   }
 }
@@ -117,5 +118,4 @@ export default {
     justify-content: flex-end;
   }
 
-  
 </style>

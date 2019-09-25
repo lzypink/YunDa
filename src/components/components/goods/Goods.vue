@@ -2,18 +2,18 @@
   <div>
     <!-- 面包屑导航区域 -->
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/1241241241' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
       <el-breadcrumb-item>参数列表</el-breadcrumb-item>
     </el-breadcrumb>
 
     <!-- 卡片视图区域 -->
     <el-card>
-      
+
       <!-- 搜索与添加区域 -->
       <el-row :gutter="20">
         <el-col :span="7">
-          <el-input v-model="queryInfo.query" placeholder="请输入内容" clearable @clear='getGoodsList()' @keyup.enter.native='getGoodsList()'> 
+          <el-input v-model="queryInfo.query" placeholder="请输入内容" clearable @clear='getGoodsList()' @keyup.enter.native='getGoodsList()'>
             <el-button slot="append" icon="el-icon-search" @click="getGoodsList()"></el-button>
           </el-input>
         </el-col>
@@ -57,7 +57,7 @@
 </template>
 <script>
 export default {
-  created() {
+  created () {
     this.getGoodsList()
   },
   data () {
@@ -69,51 +69,51 @@ export default {
       },
       total: 0,
       goods: []
-    };
+    }
   },
-  methods:{
+  methods: {
     // 获取商品列表数据
-    async getGoodsList() {
-      const { data: res } = await this.$http.get('goods',{ params: this.queryInfo })
-      if(res.meta.status != 200) return this.$message.error(res.meta.msg)
+    async getGoodsList () {
+      const { data: res } = await this.$http.get('goods', { params: this.queryInfo })
+      if (res.meta.status != 200) return this.$message.error(res.meta.msg)
       // console.log(res.data);
       this.goods = res.data.goods
       this.total = res.data.total
     },
     // 监听每页显示几条事件
-    handleSizeChange(newSize) {
+    handleSizeChange (newSize) {
       this.queryInfo.pagesize = newSize
       this.getGoodsList()
     },
     // 监听页码值改变事件
-    handleCurrentChange(newPage) {
+    handleCurrentChange (newPage) {
       this.queryInfo.pagenum = newPage
       this.getGoodsList()
     },
     // 删除商品
-    removeGoods(id) {
+    removeGoods (id) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
         const { data: res } = await this.$http.delete(`goods/${id}`)
-        if(res.meta.status != 200) return this.$message.error(res.meta.msg)
+        if (res.meta.status != 200) return this.$message.error(res.meta.msg)
         this.$message.success(res.meta.msg)
         this.getGoodsList()
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消删除'
-        });          
-      });
+        })
+      })
     },
-    goGoodsAdd() {
-      this.$router.push('/goods/add')
+    goGoodsAdd () {
+      this.$router.push('/faultRanking')
     }
   }
 }
 </script>
 <style lang='less' scoped>
-  
+
 </style>

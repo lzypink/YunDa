@@ -7,18 +7,18 @@
 
 <script>
 export default {
-  name:'app',
+  name: 'app',
   data () {
     return {
-  
-    };
+
+    }
   },
-  methods:{
-  
+  methods: {
+
   }
 }
 </script>
 
 <style lang='less' scoped>
-  
+
 </style>

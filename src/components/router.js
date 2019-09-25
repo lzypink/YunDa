@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './components/Login.vue'
-import Home from './components/Home.vue'
-import Welcome from './components/Welcome.vue'
+import Home from '../page/Home.vue'
 import Users from './components/user/Users.vue'
 import Rights from './components/power/Rights.vue'
 import Roles from './components/power/Roles.vue'
@@ -23,14 +22,14 @@ const router = new Router({
       component: Home,
       redirect: '/welcome',
       children: [
-        { path: '/welcome', component: Welcome },
+        // { path: '/welcome', component: resolve => require(['../page/Welcome.vue'], resolve) },
         { path: '/users', component: Users },
         { path: '/rights', component: Rights },
         { path: '/roles', component: Roles },
         { path: '/categories', component: Cate },
         { path: '/params', component: Params },
         { path: '/goods', component: Goods },
-        { path: '/goods/add', component: Add, name: 'Add' },
+        { path: '/goods/add', component: resolve => require(['./components/goods/Add.vue'], resolve), name: 'Add' },
         { path: '/orders', component: Order },
         { path: '/reports', component: Report }
       ]
